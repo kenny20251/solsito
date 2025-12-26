@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Krishtell</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffeff6 0%, #fff9f9 100%);
+            color: #5a2d5a;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header estilizado */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ff9ec0" fill-opacity="0.2" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,192C672,181,768,139,864,138.7C960,139,1056,181,1152,181.3C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            z-index: -1;
+        }
+        
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            color: #d63384;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            color: #9c3587;
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+        
+        .date-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9ec0, #d63384);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+            margin-top: 10px;
+        }
+        
+        /* Layout principal */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Panel izquierdo - Mensajes */
+        .love-messages {
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 182, 193, 0.3);
+        }
+        
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #d63384;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #ff9ec0, #d63384);
+            border-radius: 3px;
+        }
+        
+        .message-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tab-btn {
+            background: #f8f9fa;
+            border: 2px solid #ffcfe0;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #9c3587;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(45deg, #ff9ec0, #d63384);
+            color: white;
+            border-color: #d63384;
+        }
+        
+        .tab-btn:hover:not(.active) {
+            background: #ffe6ef;
+        }
+        
+        .message-container {
+            min-height: 450px;
+            position: relative;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .message-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .message-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .message-container::-webkit-scrollbar-thumb {
+            background: #ff9ec0;
+            border-radius: 10px;
+        }
+        
+        .message {
+            background: #fff9fb;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid #ff9ec0;
+            display: none;
+            animation: fadeIn 0.8s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .message.active {
+            display: block;
+        }
+        
+        .message-text {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: #5a2d5a;
+            margin-bottom: 20px;
+        }
+        
+        .message-icon {
+            color: #ff9ec0;
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        .message-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #ffcfe0;
+        }
+        
+        .message-counter {
+            color: #9c3587;
+            font-weight: 600;
+        }
+        
+        .message-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #f8f9fa;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #9c3587;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #ff9ec0;
+            color: white;
+        }
+        
+        /* Panel derecho - Juego de memoria */
+        .memory-game {
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 182, 193, 0.3);
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            background: #fff9fb;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .info-box {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .info-label {
+            font-size: 1rem;
+            color: #9c3587;
+            margin-bottom: 8px;
+        }
+        
+        .info-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d63384;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .game-board {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .card {
+            aspect-ratio: 1;
+            background: linear-gradient(45deg, #ffeff6, #ffe6ef);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card-front {
+            background: linear-gradient(45deg, #ff9ec0, #d63384);
+            color: white;
+            transform: rotateY(180deg);
+            font-size: 2rem;
+        }
+        
+        .card-back {
+            background: linear-gradient(45deg, #ffeff6, #ffe6ef);
+            border: 2px solid #ffcfe0;
+            color: #ff9ec0;
+            font-size: 2.5rem;
+        }
+        
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .game-btn {
+            background: linear-gradient(45deg, #ff9ec0, #d63384);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+        }
+        
+        .game-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.4);
+        }
+        
+        .game-btn.secondary {
+            background: #f8f9fa;
+            color: #9c3587;
+            border: 2px solid #ffcfe0;
+        }
+        
+        .game-message {
+            text-align: center;
+            margin-top: 25px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #d63384;
+            font-weight: 600;
+            padding: 15px;
+            background: #fff9fb;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Sección de sorpresa mejorada */
+        .surprise-section {
+            background: linear-gradient(135deg, rgba(255, 158, 192, 0.1), rgba(214, 51, 132, 0.1));
+            border-radius: 25px;
+            padding: 40px;
+            margin-top: 40px;
+            text-align: center;
+            border: 2px dashed #ff9ec0;
+        }
+        
+        .surprise-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+        
+        .secret-message {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #5a2d5a;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .surprise-btn {
+            background: linear-gradient(45deg, #ff9ec0, #d63384);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 25px rgba(214, 51, 132, 0.4);
+        }
+        
+        .surprise-btn:hover {
+            transform: scale(1.05);
+            letter-spacing: 1px;
+        }
+        
+        .hidden-surprise {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 1s ease;
+            margin-top: 30px;
+        }
+        
+        .hidden-surprise.revealed {
+            max-height: 800px;
+        }
+        
+        .surprise-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+        
+        .surprise-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .surprise-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .surprise-content::-webkit-scrollbar-thumb {
+            background: #ff9ec0;
+            border-radius: 10px;
+        }
+        
+        /* Tarjetas de razones por las que la aprecias */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .reason-card {
+            background: linear-gradient(135deg, #fff9fb, #ffeef5);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #ffcfe0;
+            transition: transform 0.3s ease;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .reason-icon {
+            font-size: 2.5rem;
+            color: #ff9ec0;
+            margin-bottom: 15px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .reason-title {
+            font-size: 1.3rem;
+            color: #d63384;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .reason-text {
+            color: #5a2d5a;
+            line-height: 1.6;
+        }
+        
+        /* Sección de aprecio */
+        .appreciation-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1), rgba(255, 105, 180, 0.1));
+            border-radius: 20px;
+        }
+        
+        .appreciation-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #d63384;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .appreciation-list {
+            list-style: none;
+        }
+        
+        .appreciation-list li {
+            padding: 15px 0;
+            font-size: 1.2rem;
+            color: #5a2d5a;
+            border-bottom: 1px dashed #ffcfe0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .appreciation-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .appreciation-icon {
+            color: #ff9ec0;
+            font-size: 1.3rem;
+            margin-right: 15px;
+            min-width: 30px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            color: #9c3587;
+            font-size: 1.1rem;
+            border-top: 1px solid #ffcfe0;
+        }
+        
+        .heartbeat {
+            color: #ff4081;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        /* Efectos especiales */
+        .firework {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        /* Botón de volver arriba */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff9ec0, #d63384);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header con título principal -->
+        <header class="header">
+            <h1 class="title">Feliz Cumpleaños Krishtell</h1>
+            <h2 class="subtitle">En tu día especial, quiero recordarte lo especial que eres</h2>
+            <div class="date-badge">
+                <i class="fas fa-birthday-cake"></i> ¡Que tengas un día maravilloso! <i class="fas fa-heart heartbeat"></i>
+            </div>
+        </header>
+        
+        <!-- Contenido principal dividido en dos columnas -->
+        <div class="main-content">
+            <!-- Panel izquierdo: Mensajes de aprecio -->
+            <section class="love-messages">
+                <h2 class="section-title">Palabras para ti</h2>
+                
+                <div class="message-tabs">
+                    <button class="tab-btn active" data-tab="appreciation">Aprecio</button>
+                    <button class="tab-btn" data-tab="memories">Recuerdos</button>
+                    <button class="tab-btn" data-tab="future">Futuro</button>
+                    <button class="tab-btn" data-tab="wishes">Deseos</button>
+                </div>
+                
+                <div class="message-container">
+                    <!-- Mensaje 1: Aprecio -->
+                    <div class="message active" id="appreciation-message">
+                        <div class="message-text">
+                            <i class="fas fa-heart message-icon"></i>
+                            Krishtell, quería decirte en este día especial lo mucho que valoro tu amistad. 
+                            Eres una persona increíble, con una energía tan positiva que ilumina los días de quienes te rodean. 
+                            Por eso te llamo cariñosamente "Solsito", porque tienes esa luz especial que alegra el ambiente.
+                        </div>
+                        <div class="message-footer">
+                            <div class="message-counter">Mensaje 1 de 4</div>
+                            <div class="message-nav">
+                                <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                                <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mensaje 2: Recuerdos -->
+                    <div class="message" id="memories-message">
+                        <div class="message-text">
+                            <i class="fas fa-star message-icon"></i>
+                            Recuerdo esos momentos en los que tu risa contagiosa llenaba el aire. 
+                            Son recuerdos que guardo con cariño, porque muestran la persona alegre y auténtica que eres. 
+                            Me gusta pensar en esos instantes en los que compartimos buenas conversaciones y risas.
+                        </div>
+                        <div class="message-footer">
+                            <div class="message-counter">Mensaje 2 de 4</div>
+                            <div class="message-nav">
+                                <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                                <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mensaje 3: Futuro -->
+                    <div class="message" id="future-message">
+                        <div class="message-text">
+                            <i class="fas fa-sun message-icon"></i>
+                            Espero que este nuevo año de vida te traiga todo lo que deseas. 
+                            Que cada uno de tus sueños se acerque más a hacerse realidad y que encuentres 
+                            la felicidad en cada paso del camino. Eres alguien con tanto potencial y estoy 
+                            seguro de que lograrás cosas increíbles.
+                        </div>
+                        <div class="message-footer">
+                            <div class="message-counter">Mensaje 3 de 4</div>
+                            <div class="message-nav">
+                                <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                                <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mensaje 4: Deseos -->
+                    <div class="message" id="wishes-message">
+                        <div class="message-text">
+                            <i class="fas fa-hands-heart message-icon"></i>
+                            En tu cumpleaños, te deseo mucha salud, éxito en todo lo que emprendas y 
+                            momentos llenos de alegría. Que este día esté lleno de sonrisas, buenos deseos 
+                            y gente que te aprecie tanto como yo te aprecio. ¡Mereces lo mejor!
+                        </div>
+                        <div class="message-footer">
+                            <div class="message-counter">Mensaje 4 de 4</div>
+                            <div class="message-nav">
+                                <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                                <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Panel derecho: Juego de memoria -->
+            <section class="memory-game">
+                <h2 class="section-title">Juego: Encuentra las Parejas</h2>
+                
+                <div class="game-info">
+                    <div class="info-box">
+                        <div class="info-label">Parejas Encontradas</div>
+                        <div class="info-value" id="pairs-found">0</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">Intentos</div>
+                        <div class="info-value" id="attempts">0</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">Tiempo</div>
+                        <div class="info-value" id="timer">60</div>
+                    </div>
+                </div>
+                
+                <div class="game-board" id="game-board">
+                    <!-- Las cartas se generan con JavaScript -->
+                </div>
+                
+                <div class="game-controls">
+                    <button class="game-btn" id="start-btn">
+                        <i class="fas fa-play-circle"></i> Iniciar Juego
+                    </button>
+                    <button class="game-btn secondary" id="hint-btn">
+                        <i class="fas fa-lightbulb"></i> Pista
+                    </button>
+                    <button class="game-btn secondary" id="reset-btn">
+                        <i class="fas fa-redo"></i> Reiniciar
+                    </button>
+                </div>
+                
+                <div class="game-message" id="game-message">
+                    Encuentra las parejas de corazones para descubrir un mensaje especial.
+                </div>
+            </section>
+        </div>
+        
+        <!-- Sección de sorpresa mejorada -->
+        <section class="surprise-section">
+            <h2 class="surprise-title">Una Sorpresa para Ti</h2>
+            <p class="secret-message">
+                Krishtell, preparé algo especial para tu cumpleaños. 
+                Quería demostrarte de una forma creativa lo mucho que valoro tu amistad...
+            </p>
+            <button class="surprise-btn" id="reveal-btn">
+                <i class="fas fa-gift floating"></i> Descubre la Sorpresa <i class="fas fa-gift floating"></i>
+            </button>
+            
+            <div class="hidden-surprise" id="hidden-surprise">
+                <div class="surprise-content">
+                    <h3 style="color: #d63384; font-size: 2rem; margin-bottom: 20px; text-align: center;">
+                        <i class="fas fa-star"></i> Mi Mensaje Especial para Ti <i class="fas fa-star"></i>
+                    </h3>
+                    
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <p style="font-size: 1.3rem; line-height: 1.8; color: #5a2d5a; margin-bottom: 20px;">
+                            Querida Krishtell, en este día tan especial quería decirte que eres una persona 
+                            realmente admirable. Valoro mucho nuestra amistad y los momentos que hemos compartido. 
+                            Admiro tu energía positiva, tu manera de ver la vida y esa luz que llevas dentro.
+                        </p>
+                        <p style="font-size: 1.3rem; line-height: 1.8; color: #5a2d5a;">
+                            Esta página es solo una pequeña muestra de mi aprecio por ti. 
+                            Espero que tengas un cumpleaños maravilloso y que este nuevo año 
+                            te traiga todo lo bueno que mereces.
+                        </p>
+                    </div>
+                    
+                    <!-- Razones por las que la aprecias -->
+                    <div style="margin-top: 40px;">
+                        <h3 style="color: #d63384; font-size: 1.8rem; margin-bottom: 25px; text-align: center;">
+                            <i class="fas fa-heart"></i> 4 Cosas que Admiro de Ti <i class="fas fa-heart"></i>
+                        </h3>
+                        
+                        <div class="reasons-grid">
+                            <div class="reason-card">
+                                <div class="reason-icon">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                                <div class="reason-title">Tu Energía Positiva</div>
+                                <div class="reason-text">
+                                    Tienes una manera única de iluminar el ambiente con tu actitud optimista y alegre.
+                                </div>
+                            </div>
+                            
+                            <div class="reason-card">
+                                <div class="reason-icon">
+                                    <i class="fas fa-laugh-beam"></i>
+                                </div>
+                                <div class="reason-title">Tu Sentido del Humor</div>
+                                <div class="reason-text">
+                                    Tu risa es contagiosa y tienes un gran sentido del humor que alegra a los demás.
+                                </div>
+                            </div>
+                            
+                            <div class="reason-card">
+                                <div class="reason-icon">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                </div>
+                                <div class="reason-title">Tu Bondad</div>
+                                <div class="reason-text">
+                                    Eres una persona genuinamente buena, con un corazón grande y generoso.
+                                </div>
+                            </div>
+                            
+                            <div class="reason-card">
+                                <div class="reason-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="reason-title">Tu Autenticidad</div>
+                                <div class="reason-text">
+                                    Eres tú misma en todo momento, sin pretender ser alguien que no eres.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sección de aprecio -->
+                    <div class="appreciation-section">
+                        <h3 class="appreciation-title">Mi Deseo para Ti</h3>
+                        <ul class="appreciation-list">
+                            <li>
+                                <i class="fas fa-star appreciation-icon"></i>
+                                Que encuentres felicidad en las pequeñas cosas de la vida
+                            </li>
+                            <li>
+                                <i class="fas fa-star appreciation-icon"></i>
+                                Que cada uno de tus sueños se acerque más a hacerse realidad
+                            </li>
+                            <li>
+                                <i class="fas fa-star appreciation-icon"></i>
+                                Que tengas salud para disfrutar todos tus logros
+                            </li>
+                            <li>
+                                <i class="fas fa-star appreciation-icon"></i>
+                                Que estés rodeada de personas que te valoren y aprecien
+                            </li>
+                            <li>
+                                <i class="fas fa-star appreciation-icon"></i>
+                                Que este nuevo año de vida esté lleno de momentos memorables
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Mensaje final -->
+                    <div style="text-align: center; margin-top: 40px; padding: 25px; background: linear-gradient(135deg, #fff9fb, #ffeef5); border-radius: 15px;">
+                        <h4 style="color: #d63384; font-size: 1.5rem; margin-bottom: 15px;">
+                            <i class="fas fa-birthday-cake"></i> ¡Feliz Cumpleaños!
+                        </h4>
+                        <p style="color: #5a2d5a; font-size: 1.2rem; line-height: 1.7;">
+                            Krishtell, espero que este día esté lleno de alegría, buenos momentos 
+                            y que sea el inicio de un año espectacular para ti. 
+                            Eres una persona especial y mereces todo lo mejor.
+                        </p>
+                        <div style="margin-top: 20px; font-size: 1.3rem; color: #d63384; font-weight: bold;">
+                            Con aprecio y cariño, para tu cumpleaños.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Hecho con cariño para Krishtell en su cumpleaños</p>
+            <p>Que tengas un día tan especial como tú</p>
+            <p style="margin-top: 15px; font-size: 1rem; color: #cc7aa8;">© 2023 - Con aprecio por tu amistad</p>
+        </footer>
+        
+        <!-- Botón para volver arriba -->
+        <div class="back-to-top" id="backToTop">
+            <i class="fas fa-chevron-up"></i>
+        </div>
+    </div>
+
+    <script>
+        // Datos del juego de memoria
+        const memoryCards = [
+            { id: 1, icon: 'fas fa-heart', text: 'Amistad' },
+            { id: 2, icon: 'fas fa-star', text: 'Estrella' },
+            { id: 3, icon: 'fas fa-sun', text: 'Sol' },
+            { id: 4, icon: 'fas fa-birthday-cake', text: 'Pastel' },
+            { id: 5, icon: 'fas fa-gift', text: 'Regalo' },
+            { id: 6, icon: 'fas fa-music', text: 'Música' },
+            { id: 7, icon: 'fas fa-smile', text: 'Sonrisa' },
+            { id: 8, icon: 'fas fa-glass-cheers', text: 'Brindis' }
+        ];
+
+        // Variables del juego
+        let gameCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let attempts = 0;
+        let timer = 60;
+        let gameInterval;
+        let gameActive = false;
+        
+        // Elementos del DOM
+        const gameBoard = document.getElementById('game-board');
+        const pairsFoundElement = document.getElementById('pairs-found');
+        const attemptsElement = document.getElementById('attempts');
+        const timerElement = document.getElementById('timer');
+        const gameMessage = document.getElementById('game-message');
+        const startBtn = document.getElementById('start-btn');
+        const hintBtn = document.getElementById('hint-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        // Sistema de pestañas de mensajes
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const messages = document.querySelectorAll('.message');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        
+        // Sorpresa
+        const revealBtn = document.getElementById('reveal-btn');
+        const hiddenSurprise = document.getElementById('hidden-surprise');
+        
+        // Inicializar pestañas de mensajes
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                
+                // Remover clase activa de todos los botones
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                // Añadir clase activa al botón clickeado
+                button.classList.add('active');
+                
+                // Ocultar todos los mensajes
+                messages.forEach(message => message.classList.remove('active'));
+                // Mostrar el mensaje correspondiente
+                document.getElementById(`${tabId}-message`).classList.add('active');
+            });
+        });
+        
+        // Navegación entre mensajes
+        let currentMessageIndex = 0;
+        
+        function showMessage(index) {
+            // Ocultar todos los mensajes
+            messages.forEach(message => message.classList.remove('active'));
+            // Mostrar el mensaje en el índice indicado
+            messages[index].classList.add('active');
+            
+            // Actualizar botones de pestañas
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabButtons[index].classList.add('active');
+            
+            currentMessageIndex = index;
+        }
+        
+        prevBtn.addEventListener('click', () => {
+            let newIndex = currentMessageIndex - 1;
+            if (newIndex < 0) newIndex = messages.length - 1;
+            showMessage(newIndex);
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            let newIndex = currentMessageIndex + 1;
+            if (newIndex >= messages.length) newIndex = 0;
+            showMessage(newIndex);
+        });
+        
+        // Inicializar juego de memoria
+        function initMemoryGame() {
+            // Duplicar y mezclar las cartas
+            gameCards = [...memoryCards, ...memoryCards];
+            gameCards = gameCards.map(card => ({
+                ...card,
+                uniqueId: Math.random()
+            }));
+            
+            // Mezclar las cartas
+            gameCards.sort(() => Math.random() - 0.5);
+            
+            // Limpiar tablero
+            gameBoard.innerHTML = '';
+            
+            // Crear cartas en el tablero
+            gameCards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.setAttribute('data-id', card.uniqueId);
+                
+                cardElement.innerHTML = `
+                    <div class="card-front">
+                        <i class="${card.icon}"></i>
+                        <div style="font-size: 0.8rem; margin-top: 5px;">${card.text}</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-question"></i>
+                    </div>
+                `;
+                
+                cardElement.addEventListener('click', () => flipCard(cardElement));
+                gameBoard.appendChild(cardElement);
+            });
+            
+            // Reiniciar variables del juego
+            flippedCards = [];
+            matchedPairs = 0;
+            attempts = 0;
+            timer = 60;
+            
+            // Actualizar UI
+            updateGameUI();
+            gameMessage.textContent = "Encuentra las parejas de corazones para descubrir un mensaje especial.";
+            gameActive = false;
+        }
+        
+        // Voltear una carta
+        function flipCard(cardElement) {
+            if (!gameActive) return;
+            
+            // No hacer nada si la carta ya está volteada o emparejada
+            if (cardElement.classList.contains('flipped') || flippedCards.length >= 2) {
+                return;
+            }
+            
+            // Voltear la carta
+            cardElement.classList.add('flipped');
+            flippedCards.push(cardElement);
+            
+            // Cuando se hayan volteado 2 cartas
+            if (flippedCards.length === 2) {
+                attempts++;
+                attemptsElement.textContent = attempts;
+                
+                const card1 = flippedCards[0];
+                const card2 = flippedCards[1];
+                
+                // Obtener los IDs de las cartas originales
+                const card1Id = gameCards.find(card => card.uniqueId == card1.getAttribute('data-id')).id;
+                const card2Id = gameCards.find(card => card.uniqueId == card2.getAttribute('data-id')).id;
+                
+                // Verificar si son pareja
+                if (card1Id === card2Id) {
+                    // Son pareja
+                    matchedPairs++;
+                    pairsFoundElement.textContent = matchedPairs;
+                    
+                    // Mensajes especiales según las parejas encontradas
+                    if (matchedPairs === 1) {
+                        gameMessage.textContent = "¡Bien! Cada pareja representa algo especial de tu cumpleaños.";
+                    } else if (matchedPairs === 4) {
+                        gameMessage.textContent = "¡Vas muy bien! Eres tan brillante como el sol, Solsito.";
+                    } else if (matchedPairs === 6) {
+                        gameMessage.textContent = "¡Casi lo logras! Que tengas un cumpleaños espectacular.";
+                    }
+                    
+                    // Reiniciar cartas volteadas
+                    flippedCards = [];
+                    
+                    // Verificar si se ganó el juego
+                    if (matchedPairs === memoryCards.length) {
+                        winGame();
+                    }
+                } else {
+                    // No son pareja, voltearlas de nuevo después de un tiempo
+                    setTimeout(() => {
+                        card1.classList.remove('flipped');
+                        card2.classList.remove('flipped');
+                        flippedCards = [];
+                    }, 1000);
+                }
+            }
+        }
+        
+        // Ganar el juego
+        function winGame() {
+            gameActive = false;
+            clearInterval(gameInterval);
+            
+            // Mostrar mensaje de victoria
+            gameMessage.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; color: #d63384; margin-bottom: 10px;">
+                        <i class="fas fa-trophy"></i> ¡Felicidades!
+                    </div>
+                    <div>
+                        Has encontrado todas las parejas. Esto representa la alegría, amistad y celebración 
+                        que mereces en tu cumpleaños. ¡Feliz cumpleaños, Krishtell!
+                    </div>
+                </div>
+            `;
+            
+            // Crear fuegos artificiales
+            createFireworks();
+        }
+        
+        // Actualizar la interfaz del juego
+        function updateGameUI() {
+            pairsFoundElement.textContent = matchedPairs;
+            attemptsElement.textContent = attempts;
+            timerElement.textContent = timer;
+        }
+        
+        // Iniciar el temporizador del juego
+        function startGameTimer() {
+            clearInterval(gameInterval);
+            
+            gameInterval = setInterval(() => {
+                timer--;
+                timerElement.textContent = timer;
+                
+                if (timer <= 0) {
+                    endGame();
+                }
+            }, 1000);
+        }
+        
+        // Terminar el juego por tiempo
+        function endGame() {
+            gameActive = false;
+            clearInterval(gameInterval);
+            
+            gameMessage.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; color: #d63384; margin-bottom: 10px;">
+                        <i class="fas fa-clock"></i> ¡Se acabó el tiempo!
+                    </div>
+                    <div>
+                        Pero los buenos deseos para tu cumpleaños no tienen límite de tiempo. 
+                        Encontraste ${matchedPairs} de ${memoryCards.length} parejas.
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Crear efectos de fuegos artificiales
+        function createFireworks() {
+            const colors = ['#ff4081', '#ff9ec0', '#d63384', '#9c3587'];
+            
+            for (let i = 0; i < 30; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = `${Math.random() * 100}vw`;
+                firework.style.top = `${Math.random() * 100}vh`;
+                firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                firework.style.boxShadow = `0 0 10px ${colors[Math.floor(Math.random() * colors.length)]}`;
+                
+                document.body.appendChild(firework);
+                
+                // Animar el fuego artificial
+                firework.animate([
+                    { transform: 'scale(0)', opacity: 1 },
+                    { transform: `scale(${Math.random() * 3 + 1})`, opacity: 0 }
+                ], {
+                    duration: 1000,
+                    easing: 'ease-out'
+                });
+                
+                // Eliminar después de la animación
+                setTimeout(() => {
+                    if (firework.parentNode) {
+                        firework.parentNode.removeChild(firework);
+                    }
+                }, 1000);
+            }
+        }
+        
+        // Botón para revelar la sorpresa
+        revealBtn.addEventListener('click', () => {
+            hiddenSurprise.classList.add('revealed');
+            revealBtn.innerHTML = '<i class="fas fa-heart heartbeat"></i> ¡Gracias por ser tan especial! <i class="fas fa-heart heartbeat"></i>';
+            revealBtn.style.background = 'linear-gradient(45deg, #9c3587, #5a2d5a)';
+            
+            // Crear efecto de confeti
+            createFireworks();
+        });
+        
+        // Botón de pista
+        hintBtn.addEventListener('click', () => {
+            if (!gameActive) {
+                gameMessage.textContent = "Primero inicia el juego para obtener una pista.";
+                return;
+            }
+            
+            gameMessage.textContent = "Busca las cartas con pasteles y regalos primero. ¡Son especiales para tu cumpleaños!";
+            
+            // Parpadear todas las cartas
+            const allCards = document.querySelectorAll('.card:not(.flipped)');
+            allCards.forEach(card => {
+                card.style.boxShadow = '0 0 15px #ff9ec0';
+                setTimeout(() => {
+                    card.style.boxShadow = '';
+                }, 1000);
+            });
+        });
+        
+        // Botón de inicio
+        startBtn.addEventListener('click', () => {
+            if (!gameActive) {
+                gameActive = true;
+                startGameTimer();
+                gameMessage.textContent = "¡Juego iniciado! Encuentra todas las parejas antes de que se acabe el tiempo.";
+                startBtn.innerHTML = '<i class="fas fa-pause-circle"></i> Pausar';
+            } else {
+                gameActive = false;
+                clearInterval(gameInterval);
+                gameMessage.textContent = "Juego en pausa. Haz clic en 'Iniciar Juego' para continuar.";
+                startBtn.innerHTML = '<i class="fas fa-play-circle"></i> Continuar';
+            }
+        });
+        
+        // Botón de reinicio
+        resetBtn.addEventListener('click', () => {
+            clearInterval(gameInterval);
+            initMemoryGame();
+            gameActive = false;
+            startBtn.innerHTML = '<i class="fas fa-play-circle"></i> Iniciar Juego';
+            gameMessage.textContent = "Juego reiniciado. Haz clic en 'Iniciar Juego' para comenzar.";
+        });
+        
+        // Botón para volver arriba
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Inicializar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            initMemoryGame();
+            
+            // Configurar cambio automático de mensajes cada 20 segundos
+            setInterval(() => {
+                let newIndex = currentMessageIndex + 1;
+                if (newIndex >= messages.length) newIndex = 0;
+                showMessage(newIndex);
+            }, 20000);
+            
+            // Efecto de entrada para los elementos
+            const elements = document.querySelectorAll('.love-messages, .memory-game, .surprise-section');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
